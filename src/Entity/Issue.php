@@ -39,9 +39,9 @@ class Issue
     private $comments;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : 1})
      */
-    private $status;
+    private $openStatus;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Label", inversedBy="issues")
@@ -126,14 +126,14 @@ class Issue
         return $this;
     }
 
-    public function getStatus(): ?bool
+    public function getOpenStatus(): ?bool
     {
-        return $this->status;
+        return $this->openStatus;
     }
 
-    public function setStatus(bool $status): self
+    public function setOpenStatus(bool $status): self
     {
-        $this->status = $status;
+        $this->openStatus = $status;
 
         return $this;
     }
