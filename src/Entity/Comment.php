@@ -24,7 +24,7 @@ class Comment
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Title;
+    private $title;
 
     /**
      * @ORM\Column(type="text")
@@ -35,6 +35,12 @@ class Comment
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Issue", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $issue;
 
     public function getId(): ?int
     {
@@ -55,12 +61,12 @@ class Comment
 
     public function getTitle(): ?string
     {
-        return $this->Title;
+        return $this->title;
     }
 
     public function setTitle(?string $Title): self
     {
-        $this->Title = $Title;
+        $this->title = $Title;
 
         return $this;
     }
@@ -85,6 +91,18 @@ class Comment
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getIssue(): ?Issue
+    {
+        return $this->issue;
+    }
+
+    public function setIssue(?Issue $issueId): self
+    {
+        $this->issueId = $issueId;
 
         return $this;
     }

@@ -34,19 +34,19 @@ class Issue
     private $startedBy;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Issue", mappedBy="issue")
-     */
-    private $comments;
-
-    /**
      * @ORM\Column(type="boolean", options={"default" : 1})
      */
     private $openStatus;
-
+    
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Label", inversedBy="issues")
      */
     private $label;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="issueId", orphanRemoval=true)
+     */
+    private $comments;
 
     public function __construct()
     {
@@ -95,37 +95,6 @@ class Issue
         return $this;
     }
 
-    /**
-     * @return Collection|self[]
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
-    public function addComment(self $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setIssue($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(self $comment): self
-    {
-        if ($this->comments->contains($comment)) {
-            $this->comments->removeElement($comment);
-            // set the owning side to null (unless already changed)
-            if ($comment->getIssue() === $this) {
-                $comment->setIssue(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getOpenStatus(): ?bool
     {
         return $this->openStatus;
@@ -159,6 +128,37 @@ class Issue
     {
         if ($this->label->contains($label)) {
             $this->label->removeElement($label);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setIssueId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getIssueId() === $this) {
+                $comment->setIssueId(null);
+            }
         }
 
         return $this;
