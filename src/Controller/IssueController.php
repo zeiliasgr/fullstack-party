@@ -21,14 +21,36 @@ class IssueController extends AbstractController
 
     	$repo = $this->getDoctrine()->getRepository(Issue::class);
 
-    	$limit = ($page - 1) * 10;
-    	$offset = 10;
+    	$open = $repo->openIssues();
+    	$closed = $repo->closedIssues();
 
-    	$issues = $repo->findBy([], $limit);
+    	$limit = 4;
+    	$offset = ($page - 1) * $limit;
+    	
+    	$issues = $repo->findBy([], ['date' => 'DESC'], $limit, $offset);
+
     	//$list = $this->getDoctrine()->getReposi
         return $this->render('issue/index.html.twig', [
-            'controller_name' => 'IssueController',
+            'issues' => $issues,
+            'open' => $open,
+            'closed' => $closed,
             'page' => $page
         ]);
+    }
+
+    /**
+     * @Route("/issue/{id}/ ", name="issue")
+     */
+    public function view($id){
+    	$issue = $this->getDoctrine()->getRepository(Issue::class)->find($id);
+
+    	if(!$issue){
+		    throw $this->createNotFoundException('No product found for id '.$id);
+    	}
+
+        return $this->render('issue/view.html.twig', [
+            'issue' => $issue
+        ]);
+
     }
 }

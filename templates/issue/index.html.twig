@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Fullstack developer task by Testio{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,29 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}!in page {{ page }} ✅</h1>
+<div>
+	<div>
+		<div>{{open}} Open</div>
+    	<div>{{closed}} Closed</div>
+	</div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/IssueController.php'|file_link(0) }}">src/Controller/IssueController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/issue/index.html.twig'|file_link(0) }}">templates/issue/index.html.twig</a></code></li>
-    </ul>
+{% for issue in issues %}
+		<div>
+			<div>
+				{{issue.id}}
+			</div>
+			<div>
+				<a href="/issue/{{issue.id}}">{{issue.title}}</a>
+			</div>
+			{% for label in issue.labels %}
+			<div>
+				{{label.name}}
+			</div>
+			{% endfor %}
+			<div>
+				{{issue.comments|length}} comments
+			</div>
+		</div>
+{% endfor %}
 </div>
 {% endblock %}

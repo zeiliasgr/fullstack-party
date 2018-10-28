@@ -22,11 +22,6 @@ class Comment
     private $user;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $title;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $body;
@@ -55,18 +50,6 @@ class Comment
     public function setUser(string $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $Title): self
-    {
-        $this->title = $Title;
 
         return $this;
     }
@@ -100,9 +83,9 @@ class Comment
         return $this->issue;
     }
 
-    public function setIssue(?Issue $issueId): self
+    public function setIssue(?Issue $issue): self
     {
-        $this->issueId = $issueId;
+        $this->issue = $issue;
 
         return $this;
     }

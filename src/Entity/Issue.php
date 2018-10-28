@@ -29,7 +29,7 @@ class Issue
     private $date;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $startedBy;
 
@@ -41,17 +41,18 @@ class Issue
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Label", inversedBy="issues")
      */
-    private $label;
+    private $labels;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="issueId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="issue", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"date" = "ASC"})
      */
     private $comments;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-        $this->label = new ArrayCollection();
+        $this->labels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,15 +111,15 @@ class Issue
     /**
      * @return Collection|Label[]
      */
-    public function getLabel(): Collection
+    public function getLabels(): Collection
     {
-        return $this->label;
+        return $this->labels;
     }
 
-    public function addLabel(Label $label): self
+    public function addLabels(Label $label): self
     {
-        if (!$this->label->contains($label)) {
-            $this->label[] = $label;
+        if (!$this->labels->contains($label)) {
+            $this->labels[] = $label;
         }
 
         return $this;
@@ -145,7 +146,7 @@ class Issue
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
-            $comment->setIssueId($this);
+            $comment->setIssue($this);
         }
 
         return $this;
@@ -156,8 +157,8 @@ class Issue
         if ($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);
             // set the owning side to null (unless already changed)
-            if ($comment->getIssueId() === $this) {
-                $comment->setIssueId(null);
+            if ($comment->getIssue() === $this) {
+                $comment->setIssue(null);
             }
         }
 

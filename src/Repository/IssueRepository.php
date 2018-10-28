@@ -19,6 +19,32 @@ class IssueRepository extends ServiceEntityRepository
         parent::__construct($registry, Issue::class);
     }
 
+    private function countStatus($val){
+        try{
+            $result = $this->createQueryBuilder('i')
+            ->select('count(i.id)')
+            ->andWhere('i.openStatus = :val')
+            ->setParameter('val', $val)
+            ->getQuery()
+            ->getSingleScalarResult();
+        }
+        catch(\Doctrine\ORM\NoResultException  $e){
+            $result = 0;
+        }
+
+        return $result;
+    }
+
+
+    public function openIssues(){
+        return $this->countStatus(1);
+    }
+
+    public function closedIssues(){
+        return $this->countStatus(0);
+    }
+
+
 //    /**
 //     * @return Issue[] Returns an array of Issue objects
 //     */

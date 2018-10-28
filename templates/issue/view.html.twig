@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fullstack developer task by Testio{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div>
+	<div>
+		{{issue.title}}
+	</div>
+
+{% for comment in issue.comments %}
+		<div>
+			<div>
+				{{comment.user}}
+			</div>
+			<div>
+				{% set difference = date("now").diff(date(comment.date)) %}
+				{% set leftDays = difference.days %}
+				{% if leftDays > 0 %}
+					{% if leftDays > 1 %}
+						{{leftDays}} days ago
+					{% else %}
+						{{leftDays}} day ago
+					{% endif %}
+				{% else %}
+					{% set leftHours = difference.h %}
+  					{{ leftHours }} hours ago
+				{% endif %}
+
+			</div>
+			<div>
+				{{comment.body}}
+			</div>
+		</div>
+{% endfor %}
+</div>
+{% endblock %}
