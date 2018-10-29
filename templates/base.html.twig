@@ -2,10 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Fullstack developer task by Testio{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     </head>
-    <body>
+    <body {% block class %}{% endblock %}>
+    	<script src="{{ asset('build/app.js') }}"></script>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

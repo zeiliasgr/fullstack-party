@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block class %}class="text-center h-100" id="background-image"{%endblock%}
+
+{% block stylesheets %} 
+{% endblock %}
+
+{% block body %}
+    <div id="background-overlay" class="h-100 w-100">
+    </div>
+    <div class="d-flex w-100 h-100 flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          
+          
+        </div>
+      </header>
+      <main role="main" class="inner position-relative">
+        <img id="logo" src="{{ asset('build/images/testio.4ffd3e70.png') }}" alt="testio logo">
+        <p class="lead">
+          <a href="/issues" class="btn btn-lg btn-primary" id="login">Login With GitHub</a>
+        </p>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          
+        </div>
+      </footer>
+          <!-- </div> -->
+
+    </div>
+  </div>
+{% endblock %}

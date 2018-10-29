@@ -1,0 +1,40 @@
+$primary: #9fd533;
+
+#login{
+	padding: 0.65rem 5rem;
+	border-radius: 5px;
+	// background-color: #9fd533;
+	color: #ffffff;
+	font-weight: bold;
+
+	&:hover{
+		background-color: #86b300;
+	}
+
+	@media screen and (max-width: 600px) {
+    	padding: 0.5rem 1rem;
+  }
+}
+
+#logo{
+	padding-bottom: 2rem;
+}
+
+#background-image{
+		background-image: url("../../assets/images/surfistas.jpg");
+
+		/* Full height */
+		height: 100%;
+
+		/* Center and scale the image nicely */
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+}
+
+#background-overlay{
+	background-color: rgba(11,15,39, 0.5);
+	position: fixed;
+}
+
+@import "~bootstrap/scss/bootstrap";

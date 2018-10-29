@@ -17,6 +17,7 @@
 
 ### all .directory KDE files ###
 **/.directory
+
 ###> symfony/webpack-encore-pack ###
 /node_modules/
 /public/build/
