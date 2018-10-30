@@ -1,0 +1,44 @@
+<div class="issues text-left">
+	{% for issue in issues %}
+		<div class="issue">
+			<div class="status">
+				{% if issue.openStatus %}
+					<span class="oi oi-flag"></span>
+				{% else %}
+					<span class="oi oi-circle-check"></span>
+				{% endif %}
+			</div>
+			<div class="title">
+				<a href="/issue/{{issue.id}}"><h4>{{issue.title}}</h4></a>
+				<div>
+					<p>
+						#{{issue.id}} opened {% set difference = date("now").diff(date(issue.date)) %}
+											{% set leftDays = difference.days %}
+											{% if leftDays > 0 %}
+												{% if leftDays > 1 %}
+													{{leftDays}} days ago
+												{% else %}
+													{{leftDays}} day ago
+												{% endif %}
+											{% else %}
+												{% set leftHours = difference.h %}
+							  					{{ leftHours }} hours ago
+											{% endif %}
+										by <span class="user">{{issue.startedBy}}</span>
+					</p>
+				</div>
+				<div class="labels">
+					{% for label in issue.labels %}
+					<span class="badge badge-primary">
+						{{label.name}}
+					</span>
+					{% endfor %}									
+				</div>
+			</div>
+
+			<div class="comments">
+				<span class="oi oi-comment-square"></span> {{issue.comments|length}}
+			</div>
+		</div>
+	{% endfor %}
+</div>

@@ -24,7 +24,7 @@ class IssueController extends AbstractController
     	$open = $repo->openIssues();
     	$closed = $repo->closedIssues();
 
-    	$limit = 4;
+    	$limit = 10;
     	$offset = ($page - 1) * $limit;
     	
     	$issues = $repo->findBy([], ['date' => 'DESC'], $limit, $offset);
@@ -34,7 +34,8 @@ class IssueController extends AbstractController
             'issues' => $issues,
             'open' => $open,
             'closed' => $closed,
-            'page' => $page
+            'page' => $page,
+            'totalPages' => ceil(($open + $closed)/$limit)
         ]);
     }
 

@@ -1,36 +1,34 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Fullstack developer task by Testio{% endblock %}
-
+	{% block class %}id="index"{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div>
-	<div>
-		<div>{{open}} Open</div>
-    	<div>{{closed}} Closed</div>
-	</div>
+	{{ include('header.html.twig') }}
 
-{% for issue in issues %}
-		<div>
-			<div>
-				{{issue.id}}
-			</div>
-			<div>
-				<a href="/issue/{{issue.id}}">{{issue.title}}</a>
-			</div>
-			{% for label in issue.labels %}
-			<div>
-				{{label.name}}
-			</div>
-			{% endfor %}
-			<div>
-				{{issue.comments|length}} comments
-			</div>
-		</div>
-{% endfor %}
+ 	<main role="main">
+		<div class="container-fluid">
+		  	<div class="row">
+			    <div class="col text-center">
+			    	<div class="oc-issues">
+						<div class="open"><span class="oi oi-flag"></span>{{open}} Open</div>
+				    	<div class="closed"><span class="oi oi-circle-check"></span>{{closed}} Closed</div>
+			    	</div>
+			    	
+			    	{{ include('issue/_issue.html.twig', {'issues': issues}) }}
+
+			    	{{ include('issue/_pagination.html.twig', {'active': page, 'total': totalPages})}}
+			    </div>
+		   		<div id="photo-bg" class="col">
+		   			    <div class="h-100 w-100 background-overlay">
+		   			    	<div class="text-center vertical-align">
+			   			    	<h1>Full Stack Developer Task</h1>
+			   			    	<p>by <img class="logo" src="{{ asset('images/testio.png') }}" alt="testio logo"></p>
+							</div>
+    					</div>
+		   		</div>
+		   	</div>
+	    </div>
+	</main>
+
+
 </div>
 {% endblock %}

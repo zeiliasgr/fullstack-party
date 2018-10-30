@@ -10,8 +10,9 @@ require('../css/app.scss');
 require('../../assets/css/cover.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-var $ = require('jquery');
-// var p = require('popper');
-var b = require('bootstrap');
+equire('jquery');
+require('bootstrap');
+
+// require('open-iconic');
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
