@@ -10,7 +10,7 @@ require('../css/app.scss');
 require('../../assets/css/cover.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-equire('jquery');
+require('jquery');
 require('bootstrap');
 
 // require('open-iconic');

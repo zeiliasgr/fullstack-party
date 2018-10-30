@@ -214,9 +214,22 @@ $index-color: #333333;
 		}
 	}
 
-	.padge{
-		font-size: 75%;
+	.badge-rfc, .badge-deprecation{
+		background-color: limegreen;
+		color: white;
 	}
+
+	.badge-fatal, .badge-urgent{
+		background-color: crimson;
+		color: white;
+	}
+
+	.badge-uncorfimed, .badge-bug{
+		background-color: gold;
+		color: $index-color;
+	}
+
+
 }
 
 nav[role=pagination]{
@@ -225,6 +238,12 @@ nav[role=pagination]{
 	ul.pagination{
 		position: relative;
 		left: 25%;
+	}
+
+	.page-item:not(.disabled){
+		.page-link.next, .page-link.previous{
+			color: $primary;
+		}
 	}
 
 	.page-link{
@@ -241,7 +260,6 @@ nav[role=pagination]{
 	}
 
 	.page-link.next, .page-link.previous{
-		color: $primary;
 		background-color: unset;
 
 		&:hover{

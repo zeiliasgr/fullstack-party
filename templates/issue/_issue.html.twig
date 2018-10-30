@@ -29,7 +29,7 @@
 				</div>
 				<div class="labels">
 					{% for label in issue.labels %}
-					<span class="badge badge-primary">
+					<span class="badge badge-{{label.name|lower}}">
 						{{label.name}}
 					</span>
 					{% endfor %}									
