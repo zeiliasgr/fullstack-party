@@ -7,14 +7,15 @@
  	<main role="main">
 		<div class="container-fluid">
 		  	<div class="row">
-			    <div class="col text-center">
-			    	<div class="oc-issues">
-						<div class="open"><span class="oi oi-flag"></span>{{open}} Open</div>
-				    	<div class="closed"><span class="oi oi-circle-check"></span>{{closed}} Closed</div>
+			    <div class="col text-center issues-container">
+			    	<div class="issues">
+				    	<div class="oc-issues">
+							<div class="open"><span class="oi oi-flag"></span>{{open}} Open</div>
+					    	<div class="closed"><span class="oi oi-check"></span>{{closed}} Closed</div>
+				    	</div>
+				    	
+				    	{{ include('issue/_issue.html.twig', {'issues': issues}) }}
 			    	</div>
-			    	
-			    	{{ include('issue/_issue.html.twig', {'issues': issues}) }}
-
 			    	{{ include('issue/_pagination.html.twig', {'active': page, 'total': totalPages})}}
 			    </div>
 		   		<div id="photo-bg" class="col">

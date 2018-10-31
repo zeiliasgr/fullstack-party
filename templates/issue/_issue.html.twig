@@ -1,29 +1,18 @@
-<div class="issues text-left">
+<div class="text-left">
 	{% for issue in issues %}
 		<div class="issue">
 			<div class="status">
 				{% if issue.openStatus %}
 					<span class="oi oi-flag"></span>
 				{% else %}
-					<span class="oi oi-circle-check"></span>
+					<span class="oi oi-check"></span>
 				{% endif %}
 			</div>
 			<div class="title">
 				<a href="/issue/{{issue.id}}"><h4>{{issue.title}}</h4></a>
 				<div>
 					<p>
-						#{{issue.id}} opened {% set difference = date("now").diff(date(issue.date)) %}
-											{% set leftDays = difference.days %}
-											{% if leftDays > 0 %}
-												{% if leftDays > 1 %}
-													{{leftDays}} days ago
-												{% else %}
-													{{leftDays}} day ago
-												{% endif %}
-											{% else %}
-												{% set leftHours = difference.h %}
-							  					{{ leftHours }} hours ago
-											{% endif %}
+						#{{issue.id}} opened {{ include('issue/_since-creation.html.twig', {'since': date(issue.date)}) }}
 										by <span class="user">{{issue.startedBy}}</span>
 					</p>
 				</div>

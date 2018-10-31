@@ -1,42 +1,61 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Fullstack developer task by Testio{% endblock %}
-
+	{% block class %}id="index"{% endblock %}
+	{% block title %}{{issue.title}}{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div>
-	<div>
-		{{issue.title}}
-	</div>
+	{{ include('header.html.twig') }}
 
-{% for comment in issue.comments %}
-		<div>
-			<div>
-				{{comment.user}}
+ 	<main role="main">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 offset-md-1">
+					<div class="back">
+						<a href="{{app.request.headers.get('referer')}}"><span class="oi oi-arrow-thick-left"></span>
+						Back to Issues</a>
+					</div>
+				</div>
 			</div>
-			<div>
-				{% set difference = date("now").diff(date(comment.date)) %}
-				{% set leftDays = difference.days %}
-				{% if leftDays > 0 %}
-					{% if leftDays > 1 %}
-						{{leftDays}} days ago
-					{% else %}
-						{{leftDays}} day ago
-					{% endif %}
-				{% else %}
-					{% set leftHours = difference.h %}
-  					{{ leftHours }} hours ago
-				{% endif %}
+			<div class="row">
+				<div class="col-lg-11 offset-lg-1">
+					<div class="issue-title">
+						<h3>{{issue.title}} <span class="issue-id">#{{issue.id}}</span></h3>
+						<div class="subtitle">
+							<div class="status">
+								{% if issue.openStatus %}
+									<span class="badge badge-primary"><span class="oi oi-flag"></span> OPEN</span>
+								{% else %}
+									<span class="badge badge-info"><span class="oi oi-check"></span> CLOSE</span>
+								{% endif %}
+							</div>
+							<div class="creation">
+								<span class="user">{{issue.startedBy}}</span> opened this issue {{ include('issue/_since-creation.html.twig', {'since': date(issue.date)}) }} - {{ issue.comments|length }} {% if issue.comments|length > 1 %}comments{% else %}comment{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-11 offset-lg-1">
+					{% for comment in issue.comments %}
+						<div class="comment-wrapper">
+							<div class="comment-photo">
+								<img src="{{ asset('images/'~random(['one', 'two', 'three'])~'.jpg') }}">
+							</div>
+							<div class="comment">
+								<div class="comment-title">
+									<span class="user">{{comment.user}}</span> commented {{ include('issue/_since-creation.html.twig', {'since': date(comment.date)}) }}
+								</div>
+								<div class="comment-body">
+									{{comment.body}}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+	    </div>
+	</main>
 
-			</div>
-			<div>
-				{{comment.body}}
-			</div>
-		</div>
-{% endfor %}
+
 </div>
 {% endblock %}

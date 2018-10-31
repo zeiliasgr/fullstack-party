@@ -1,0 +1,16 @@
+{% set difference = date("now").diff(since) %}
+{% set leftDays = difference.days %}
+{% if leftDays > 0 %}
+	{% if leftDays > 1 %}
+		{{leftDays}} days ago
+	{% else %}
+		{{leftDays}} day ago
+	{% endif %}
+{% else %}
+	{% set leftHours = difference.h %}
+		{% if leftHours > 1 %}
+			{{leftHours}} hours ago
+		{% else %}
+			{{leftHours}} hour ago
+		{% endif %}
+{% endif %}
