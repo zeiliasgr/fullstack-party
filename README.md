@@ -13,7 +13,7 @@ If you found this task it means we are looking for you!
 ## Few simple requirements
 
 - Design should be recreated as closely as possible. DONE
-- Design must be responsive. Because we live in our smartphones and we will check with them for sure. DONE
+- Design must be responsive. Because we live in our smartphones and we will check with them for sure. DONE with some glitches
 - Use GitHub V3 REST API to receive data. [Docs here](https://developer.github.com/v3/) No Authentication through GitHub.
 - Use popular PHP framework (SlimPHP, Lumen, Symfony, Laravel, Zend or any other) DONE[Symfony]
 - Use AngularJS or ReactJS. Not used.
